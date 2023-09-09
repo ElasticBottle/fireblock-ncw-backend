@@ -68,3 +68,5 @@ AppDataSource.initialize()
     console.error("Error during Data Source initialization", err);
     process.exit(1);
   });
+
+module.exports = app;
