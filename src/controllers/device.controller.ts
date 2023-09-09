@@ -7,7 +7,7 @@ export class DeviceController {
   constructor(private readonly service: DeviceService) {}
 
   async assign(req: RequestEx, res: Response, next: NextFunction) {
-    const auth = stubAuth(req.body.id);
+    const auth = stubAuth(req.headers);
     const { params } = req;
     const { sub } = auth!.payload;
     const { deviceId } = params;
@@ -34,7 +34,7 @@ export class DeviceController {
   }
 
   async findAll(req: RequestEx, res: Response, next: NextFunction) {
-    const auth = stubAuth(req.body.id);
+    const auth = stubAuth(req.headers);
     const { sub } = auth!.payload;
 
     try {

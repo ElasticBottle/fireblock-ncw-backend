@@ -8,7 +8,7 @@ export class UserController {
   async login(req: Request, res: Response, next: NextFunction) {
     req.auth;
     try {
-      const auth = stubAuth(req.body.id);
+      const auth = stubAuth(req.headers);
       if (!auth) {
         throw new Error("Missing auth context");
       }
