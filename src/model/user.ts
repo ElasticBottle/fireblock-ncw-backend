@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Device } from "./device";
-import { Message } from "./message";
 
 @Entity()
 export class User extends BaseEntity {
@@ -19,8 +18,7 @@ export class User extends BaseEntity {
   sub: string;
 
   @OneToMany(() => Device, (device) => device.userId, {
-    createForeignKeyConstraints: false
-
+    createForeignKeyConstraints: false,
   })
   devices: Device[];
 }
