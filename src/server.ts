@@ -11,7 +11,7 @@ dotenv.config();
 
 const port = process.env.PORT;
 
-const webhookPublicKey = process.env.FIREBLOCKS_WEBHOOK_PUBLIC_KEYy!.replace(
+const webhookPublicKey = process.env.FIREBLOCKS_WEBHOOK_PUBLIC_KEY!.replace(
   /\\n/g,
   "\n",
 );
