@@ -5,14 +5,15 @@ import {
   TransactionArguments,
   TransactionStatus,
 } from "fireblocks-sdk";
-import { RequestEx } from "../interfaces/requestEx";
-import { waitForTransactionTimeout } from "../app";
-import { TransactionSubscriber } from "../subscribers/transaction.subscriber";
-import { TransactionService } from "../services/transaction.service";
 import { FindOptionsOrderValue } from "typeorm";
+import { waitForTransactionTimeout } from "../app";
+import { RequestEx } from "../interfaces/requestEx";
+import { TransactionService } from "../services/transaction.service";
+import { TransactionSubscriber } from "../subscribers/transaction.subscriber";
+import { stubAuth } from "../util/stubAuth";
 import {
-  buildOnetimeAddressTransferArgs,
   buildAccountTransferArgs,
+  buildOnetimeAddressTransferArgs,
   buildTestTypedDataArgs,
 } from "../util/transactionBuilder";
 
@@ -60,10 +61,12 @@ export class TransactionController {
 
   async create(req: RequestEx, res: Response, next: NextFunction) {
     const { device, body } = req;
+    const auth = stubAuth(req.headers);
+
     const {
       assetId = "ETH_TEST3",
       accountId = "0",
-      note = `API Transaction by ${req.auth?.payload.sub}`,
+      note = `API Transaction by ${auth.payload.sub}`,
       destAddress = undefined,
       destAccount = undefined,
       amount = "0.00001",

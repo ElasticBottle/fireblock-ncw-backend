@@ -23,11 +23,11 @@ export class MessageController {
     ) {
       return res.status(400).send("Invalid physicalDeviceId value");
     }
-
+    const auth = stubAuth(req.headers);
     try {
       const messages = await getMessages(
         req.device!.id,
-        req.auth!.payload.sub!,
+        auth.payload.sub!,
         batchSize,
         physicalDeviceId,
         timeout,

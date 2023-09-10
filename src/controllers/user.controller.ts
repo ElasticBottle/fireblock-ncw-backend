@@ -6,7 +6,6 @@ export class UserController {
   constructor(private readonly service: UserService) {}
 
   async login(req: Request, res: Response, next: NextFunction) {
-    req.auth;
     try {
       const auth = stubAuth(req.headers);
       if (!auth) {
