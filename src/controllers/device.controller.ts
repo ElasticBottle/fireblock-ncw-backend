@@ -15,6 +15,7 @@ export class DeviceController {
     try {
       // check if device was already assigned wallet
       const prevDevice = await this.service.findOne(deviceId);
+
       if (prevDevice) {
         if (prevDevice.user.sub !== sub) {
           return res.status(401).send();

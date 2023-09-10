@@ -3,3 +3,5 @@ node_modules
 .env
 *.log
 .yarn
+fireblocks_secret.key
+fireblocks.csr

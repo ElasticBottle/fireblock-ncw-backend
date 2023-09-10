@@ -15,14 +15,11 @@ const webhookPublicKey = process.env.FIREBLOCKS_WEBHOOK_PUBLIC_KEY!.replace(
   /\\n/g,
   "\n",
 );
-const signerApiSecret = process.env.FIREBLOCKS_SIGNER_API_SECRET!.replace(
+const signerApiSecret = process.env.FIREBLOCKS_API_SECRET!.replace(
   /\\n/g,
   "\n",
 );
-const adminApiSecret = process.env.FIREBLOCKS_ADMIN_API_SECRET!.replace(
-  /\\n/g,
-  "\n",
-);
+const adminApiSecret = process.env.FIREBLOCKS_API_SECRET!.replace(/\\n/g, "\n");
 
 const apiKeyCmc = process.env.CMC_PRO_API_KEY!;
 const apiKeyNcwSigner = process.env.FIREBLOCKS_API_KEY_NCW_SIGNER!;
