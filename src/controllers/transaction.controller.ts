@@ -13,8 +13,9 @@ import { TransactionSubscriber } from "../subscribers/transaction.subscriber";
 import { stubAuth } from "../util/stubAuth";
 import {
   buildAccountTransferArgs,
+  buildContractCallArgs,
   buildOnetimeAddressTransferArgs,
-  buildTestTypedDataArgs,
+  buildTypedDataArgs,
 } from "../util/transactionBuilder";
 
 export class TransactionController {
@@ -69,10 +70,12 @@ export class TransactionController {
       note = `API Transaction by ${auth.payload.sub}`,
       destAddress = undefined,
       destAccount = undefined,
-      amount = "0.00001",
+      amount = "0.00000",
       feeLevel = FeeLevel.MEDIUM,
       gasLimit = undefined,
       estimateFee = false,
+      typedData = {},
+      transactionRequest = undefined,
     } = body;
 
     try {
@@ -90,6 +93,9 @@ export class TransactionController {
 
       let args: TransactionArguments;
 
+      if (transactionRequest) {
+        args = buildContractCallArgs(transactionRequest);
+      }
       if (destAddress) {
         args = buildOnetimeAddressTransferArgs(
           destAddress,
@@ -106,7 +112,7 @@ export class TransactionController {
           gasLimit,
         );
       } else {
-        args = buildTestTypedDataArgs();
+        args = buildTypedDataArgs(typedData);
       }
 
       if (estimateFee) {

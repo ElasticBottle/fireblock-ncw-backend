@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
-import { RequestEx } from "../interfaces/requestEx";
 import { Clients } from "../interfaces/Clients";
+import { RequestEx } from "../interfaces/requestEx";
 
 export class AccountContoller {
   constructor(private readonly clients: Clients) {}
