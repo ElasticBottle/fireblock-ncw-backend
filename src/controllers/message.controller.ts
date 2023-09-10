@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import { RequestEx } from "../interfaces/requestEx";
-import { getMessages, deleteMessage } from "../services/message.service";
+import { deleteMessage, getMessages } from "../services/message.service";
+import { stubAuth } from "../util/stubAuth";
 
 export class MessageController {
   async findMany(req: RequestEx, res: Response, next: NextFunction) {
@@ -39,7 +40,8 @@ export class MessageController {
   }
 
   async deleteOne(req: RequestEx, res: Response, next: NextFunction) {
-    const { auth, params, device } = req;
+    const auth = stubAuth(req.headers);
+    const { params, device } = req;
     const { messageId } = params;
 
     try {
