@@ -1,8 +1,9 @@
 import crypto from "crypto";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export const validateWebhook =
   (publicKey: string) => (req: Request, res: Response, next: NextFunction) => {
+    console.log("validating webhook");
     const message = JSON.stringify(req.body);
     const signature = req.headers["fireblocks-signature"];
 

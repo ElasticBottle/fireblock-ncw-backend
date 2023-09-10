@@ -77,7 +77,7 @@ export class TransactionController {
       typedData = {},
       transactionRequest = undefined,
     } = body;
-
+    console.log("transactionRequest", transactionRequest);
     try {
       const { walletId } = device!;
 
@@ -179,6 +179,7 @@ export class TransactionController {
 
     try {
       const { walletId } = device!;
+      console.log("walletId", walletId);
 
       let transactions = await this.service.find(
         walletId,

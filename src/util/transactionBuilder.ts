@@ -1,4 +1,5 @@
-import { TransactionRequest, formatEther, toBigInt } from "ethers";
+import { BigNumber, ethers } from "ethers";
+import { formatEther } from "ethers/lib/utils";
 import {
   FeeLevel,
   PeerType,
@@ -79,7 +80,7 @@ export function buildTypedDataArgs(raw: {
 }
 
 export function buildContractCallArgs(
-  transaction: TransactionRequest,
+  transaction: ethers.providers.TransactionRequest,
 ): TransactionArguments {
   return {
     operation: transaction.data
@@ -87,15 +88,16 @@ export function buildContractCallArgs(
       : TransactionOperation.TRANSFER,
     fee: undefined,
     maxFee: transaction.maxFeePerGas
-      ? toBigInt(transaction.maxFeePerGas).toString()
+      ? BigNumber.from(transaction.maxFeePerGas).toString()
       : undefined,
     priorityFee: transaction.maxPriorityFeePerGas
-      ? toBigInt(transaction.maxPriorityFeePerGas).toString()
+      ? BigNumber.from(transaction.maxPriorityFeePerGas).toString()
       : undefined,
     gasLimit: transaction.gasLimit
-      ? toBigInt(transaction.gasLimit).toString()
+      ? BigNumber.from(transaction.gasLimit).toString()
       : undefined,
     feeLevel: undefined,
+
     destination: {
       type: PeerType.ONE_TIME_ADDRESS,
       oneTimeAddress: {
@@ -103,7 +105,7 @@ export function buildContractCallArgs(
       },
     },
     externalTxId: undefined,
-    amount: formatEther(toBigInt(transaction.value ?? "0")?.toString()),
+    amount: formatEther(BigNumber.from(transaction.value ?? "0")?.toString()),
     extraParameters: transaction.data
       ? {
           contractCallData: transaction.data,
